@@ -31,7 +31,8 @@ monthly_retention AS (
 SELECT
 customer_sex AS "Пол пользователя",
 month_since_install "Количество месяцев",
-ROUND(COUNT(DISTINCT user_id)/MAX(COUNT(DISTINCT user_id)) OVER (PARTITION BY customer_sex ORDER BY month_since_install)::numeric,2) AS retention_rate
+ROUND(COUNT(DISTINCT user_id)/MAX(COUNT(DISTINCT user_id)) 
+OVER (PARTITION BY customer_sex ORDER BY month_since_install)::numeric,2) AS retention_rate
 FROM monthly_retention
 GROUP BY customer_sex, month_since_install
 ORDER BY customer_sex, month_since_install;
